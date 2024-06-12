@@ -1,4 +1,4 @@
-name: "CaffeNet"
+name: "CaffeNetImproved"
 input: "data"
 input_dim: 10
 input_dim: 3
@@ -93,16 +93,50 @@ layers {
     kernel_size: 3
   }
 }
-layers{
-  name: "relu3" 
+layers {
+  name: "relu3"
   type: RELU
   bottom: "conv3"
   top: "conv3"
 }
 layers {
+  name: "conv4"
+  type: CONVOLUTION
+  bottom: "conv3"
+  top: "conv4"
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+  }
+}
+layers {
+  name: "relu4"
+  type: RELU
+  bottom: "conv4"
+  top: "conv4"
+}
+layers {
+  name: "conv5"
+  type: CONVOLUTION
+  bottom: "conv4"
+  top: "conv5"
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+  }
+}
+layers {
+  name: "relu5"
+  type: RELU
+  bottom: "conv5"
+  top: "conv5"
+}
+layers {
   name: "pool5"
   type: POOLING
-  bottom: "conv3"
+  bottom: "conv5"
   top: "pool5"
   pooling_param {
     pool: MAX
